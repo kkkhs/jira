@@ -1,9 +1,6 @@
 export interface User {
   id: string;
   name: string;
-  email: string;
-  title: string;
-  organization: string;
 }
 
 interface SearchPanelProps {
