@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { loadServer, DevTools } from "jira-dev-tool";
 import { AppProviders } from "./context";
+import { Button } from "antd";
 
 loadServer(() =>
   ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

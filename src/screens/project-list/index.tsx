@@ -21,13 +21,13 @@ export const ProjectListScreen = () => {
   const [list, setList] = useState([]);
   const client = useHttp();
 
-  useEffect(() => {
-    client("projects", { data: cleanObject(debouncedParam) }).then(setList);
-  }, [debouncedParam]);
+  // useEffect(() => {
+  //   client("projects", { data: cleanObject(debouncedParam) }).then(setList);
+  // }, [debouncedParam]);
 
-  useMount(() => {
-    client("users").then(setUsers);
-  });
+  // useMount(() => {
+  //   client("users").then(setUsers);
+  // });
 
   return (
     <div>
