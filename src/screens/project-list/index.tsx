@@ -1,42 +1,40 @@
-import { SearchPanel } from "./search-panel";
-import { List } from "./list";
-import { useEffect, useState } from "react";
-import { cleanObject, useDebounce, useMount } from "../../utils";
-import * as qs from "qs";
+import { useArray, useMount } from "utils";
+import React, { useState } from "react";
 
-const apiUrl = process.env.REACT_APP_API_URL;
 export const ProjectListScreen = () => {
-  const [users, setUsers] = useState([]);
-  const [param, setParam] = useState({
-    name: "",
-    personId: "",
-  });
-  const debounceParam = useDebounce(param, 200);
-  const [list, setList] = useState([]);
+  const persons: { name: string; age: number }[] = [
+    { name: "jack", age: 25 },
+    { name: "ma", age: 22 },
+  ];
+  const { value, clear, removeIndex, add } = useArray(persons);
 
-  useEffect(() => {
-    fetch(
-      `${apiUrl}/projects?${qs.stringify(cleanObject(debounceParam))}`,
-    ).then(async (response) => {
-      if (response.ok) {
-        setList(await response.json());
-      }
-    });
-  }, [debounceParam]);
-
-  // 初始化
   useMount(() => {
-    fetch(`${apiUrl}/users`).then(async (response) => {
-      if (response.ok) {
-        setUsers(await response.json());
-      }
-    });
+    // 期待这里报错：Property 'notExist' does not exist on type '{ name: string; age: number; }[]'.
+    // console.log(value.notExist);
+    //
+    // // 期待这里报错：Property 'age' is missing in type '{ name: string; }' but required in type '{ name: string; age: number; }'.
+    // add({ name: "david" });
+    //
+    // // 期待这里报错：Argument of type 'string' is not assignable to parameter of type 'number'.
+    // removeIndex("123");
   });
-
   return (
     <div>
-      <SearchPanel users={users} param={param} setParam={setParam} />
-      <List users={users} list={list} />
+      {/*期待: 点击以后增加 john */}
+      <button onClick={() => add({ name: "john", age: 22 })}>add john</button>
+      {/*期待: 点击以后删除第一项*/}
+      <button onClick={() => removeIndex(0)}>remove 0</button>
+      {/*期待：点击以后清空列表*/}
+      <button style={{ marginBottom: "50px" }} onClick={() => clear()}>
+        clear
+      </button>
+      {value.map((person, index) => (
+        <div style={{ marginBottom: "30px" }} key={index}>
+          <span style={{ color: "red" }}>{index}</span>
+          <span>{person.name}</span>
+          <span>{person.age}</span>
+        </div>
+      ))}
     </div>
   );
 };
