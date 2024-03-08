@@ -5,15 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { loadServer, DevTools } from "jira-dev-tool";
 import { AppProviders } from "./context";
-import { Button } from "antd";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 loadServer(() =>
   ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>
-      <AppProviders>
-        <DevTools />
-        <App />
-      </AppProviders>
+      <QueryClientProvider client={new QueryClient()}>
+        <AppProviders>
+          <DevTools />
+          <App />
+        </AppProviders>
+      </QueryClientProvider>
     </React.StrictMode>,
   ),
 );
