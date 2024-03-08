@@ -1,5 +1,5 @@
 // 排除value为0
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const isFalsy = (value: unknown): boolean =>
   value === 0 ? false : !value;
@@ -65,7 +65,9 @@ export const useArray = <T>(initialArray: T[]) => {
 };
 
 export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
-  const oldTitle = document.title;
+  // 如果直接const oldTitle = document.title -》 oldTitle的值会随页面的加载而变化:
+  // 使用useRef使得某个值在生命周期内不发生变化
+  const oldTitle = useRef(document.title).current;
 
   useEffect(() => {
     document.title = title;
@@ -75,8 +77,9 @@ export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
   useEffect(() => {
     return () => {
       if (keepOnUnmount) {
+        // 如果不指定依赖，读到的就是旧title
         document.title = oldTitle;
       }
     };
-  }, []);
+  }, [keepOnUnmount, oldTitle]);
 };
