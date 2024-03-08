@@ -12,6 +12,7 @@
     "@types/node": "^16.18.86",
     "@types/react": "^18.2.63",
     "@types/react-dom": "^18.2.20",
+    "dayjs": "1.9.7",
     "inquirer": "^8.2.0",
     "jira-dev-tool": "^2.0.7",
     "msw": "^0.33.2",
