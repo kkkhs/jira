@@ -1,11 +1,12 @@
-import { User } from "./search-panel";
+import React from "react";
+import { User } from "screens/project-list/search-panel";
 import { Table } from "antd";
 
 interface Project {
   id: string;
   name: string;
   personId: string;
-  created: number;
+  pin: boolean;
   organization: string;
 }
 
@@ -29,7 +30,7 @@ export const List = ({ list, users }: ListProps) => {
           render(value, project) {
             return (
               <span>
-                {users.find((user) => user.id == project.personId)?.name ||
+                {users.find((user) => user.id === project.personId)?.name ||
                   "未知"}
               </span>
             );

@@ -1,8 +1,12 @@
+import React from "react";
 import { Input, Select } from "antd";
 
 export interface User {
   id: string;
   name: string;
+  email: string;
+  title: string;
+  organization: string;
   token: string;
 }
 
@@ -19,7 +23,7 @@ export const SearchPanel = ({ users, param, setParam }: SearchPanelProps) => {
   return (
     <form>
       <div>
-        {/*setParam(Object.assign({}, param, {name: evt.target.value}))*/}
+        {/*setParam(Object.assign({}, param, {name:evt.target.value}))*/}
         <Input
           type="text"
           value={param.name}
