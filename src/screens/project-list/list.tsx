@@ -17,6 +17,7 @@ export interface Project {
 
 interface ListProps extends TableProps<Project> {
   users: User[];
+  refresh?: () => void;
 }
 
 export const List = ({ users, ...props }: ListProps) => {
@@ -32,7 +33,9 @@ export const List = ({ users, ...props }: ListProps) => {
             return (
               <Pin
                 checked={project.pin}
-                onCheckedChange={(pin) => mutate({ id: project.id, pin })}
+                onCheckedChange={(pin) =>
+                  mutate({ id: project.id, pin }).then(props.refresh)
+                }
               />
             );
           },

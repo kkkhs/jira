@@ -30,6 +30,8 @@ export const useAsync = <D>(
     ...initialState,
   });
 
+  const [retry, setRetry] = useState(() => () => {});
+
   const setData = (data: D) =>
     setState({
       data,
@@ -45,10 +47,20 @@ export const useAsync = <D>(
     });
 
   //用来触发异步请求
-  const run = (promise: Promise<D>) => {
+  const run = (
+    promise: Promise<D>,
+    runConfig?: { retry: () => Promise<D> },
+  ) => {
     if (!promise || !promise.then) {
       throw new Error("请传入 Promise 类型数据");
     }
+    // 利用State的惰性存储函数
+    setRetry(() => () => {
+      if (runConfig?.retry()) {
+        run(runConfig?.retry(), runConfig);
+      }
+    });
+
     setState({ ...state, stat: "loading" });
 
     return promise
@@ -63,6 +75,7 @@ export const useAsync = <D>(
         return error;
       });
   };
+
   return {
     isIdle: state.stat === "idle",
     isLoading: state.stat === "loading",
@@ -71,6 +84,8 @@ export const useAsync = <D>(
     run,
     setData,
     setError,
+    // retry被调用时 重新调用run =》刷新State
+    retry,
     ...state,
   };
 };
