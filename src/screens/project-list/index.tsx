@@ -1,16 +1,16 @@
 import React from "react";
 import { SearchPanel } from "screens/project-list/search-panel";
 import { List } from "screens/project-list/list";
-import { useState } from "react";
 import { useDebounce, useDocumentTitle } from "../../utils";
 import styled from "@emotion/styled";
-import { Typography } from "antd";
+import { Button, Typography, Row } from "antd";
 import { useProjects } from "../../utils/project";
 import { useUsers } from "../../utils/user";
-import { useUrlQueryParam } from "../../utils/url";
 import { useProjectsSearchParams } from "./util";
 
-export const ProjectListScreen = () => {
+export const ProjectListScreen = (props: {
+  setProjectModalOpen: (isOpen: boolean) => void;
+}) => {
   useDocumentTitle("项目列表", false);
 
   const [param, setParam] = useProjectsSearchParams();
@@ -24,7 +24,12 @@ export const ProjectListScreen = () => {
 
   return (
     <Container>
-      <h1>项目列表</h1>
+      <Row justify={"space-between"}>
+        <h1>项目列表</h1>
+        <Button onClick={() => props.setProjectModalOpen(true)}>
+          创建项目
+        </Button>
+      </Row>
       <SearchPanel users={users || []} param={param} setParam={setParam} />
 
       {error ? (
@@ -32,6 +37,7 @@ export const ProjectListScreen = () => {
       ) : null}
 
       <List
+        setProjectModalOpen={props.setProjectModalOpen}
         refresh={retry}
         loading={isLoading}
         users={users || []}
