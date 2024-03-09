@@ -13,9 +13,7 @@ export const AnthenticatedApp = () => {
   const value: any = undefined;
   return (
     <Container>
-      <Button type={"link"} onClick={resetRoute}>
-        <PageHeader />
-      </Button>
+      <PageHeader />
       <Main>
         <Router>
           <Routes>
@@ -38,7 +36,9 @@ const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
-        <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
+        <Button type={"link"} onClick={resetRoute}>
+          <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
+        </Button>
         <h2>项目</h2>
         <h2>用户</h2>
       </HeaderLeft>
