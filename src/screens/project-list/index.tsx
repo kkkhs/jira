@@ -9,7 +9,7 @@ import { useUsers } from "../../utils/user";
 import { useProjectsSearchParams } from "./util";
 
 export const ProjectListScreen = (props: {
-  setProjectModalOpen: (isOpen: boolean) => void;
+  projectButton: React.ReactNode;
 }) => {
   useDocumentTitle("项目列表", false);
 
@@ -26,9 +26,7 @@ export const ProjectListScreen = (props: {
     <Container>
       <Row justify={"space-between"}>
         <h1>项目列表</h1>
-        <Button onClick={() => props.setProjectModalOpen(true)}>
-          创建项目
-        </Button>
+        {props.projectButton}
       </Row>
       <SearchPanel users={users || []} param={param} setParam={setParam} />
 
@@ -37,7 +35,7 @@ export const ProjectListScreen = (props: {
       ) : null}
 
       <List
-        setProjectModalOpen={props.setProjectModalOpen}
+        projectButton={props.projectButton}
         refresh={retry}
         loading={isLoading}
         users={users || []}

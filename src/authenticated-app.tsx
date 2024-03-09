@@ -8,7 +8,7 @@ import { ProjectScreen } from "./screens/project";
 import { Navigate, Route, Routes } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
 import { resetRoute } from "./utils";
-import { useState } from "react";
+import React, { useState } from "react";
 import { ProjectModal } from "./screens/project-list/project-modal";
 import { ProjectPopover } from "./components/project-popover";
 
@@ -17,14 +17,32 @@ export const AuthenticatedApp = () => {
 
   return (
     <Container>
-      <PageHeader setProjectModalOpen={setProjectModalOpen} />
+      <PageHeader
+        projectButton={
+          <ButtonNoPadding
+            onClick={() => setProjectModalOpen(true)}
+            type={"link"}
+          >
+            创建项目
+          </ButtonNoPadding>
+        }
+      />
       <Main>
         <Router>
           <Routes>
             <Route
               path={"/projects"}
               element={
-                <ProjectListScreen setProjectModalOpen={setProjectModalOpen} />
+                <ProjectListScreen
+                  projectButton={
+                    <ButtonNoPadding
+                      onClick={() => setProjectModalOpen(true)}
+                      type={"link"}
+                    >
+                      创建项目
+                    </ButtonNoPadding>
+                  }
+                />
               }
             />
             <Route
@@ -43,16 +61,14 @@ export const AuthenticatedApp = () => {
   );
 };
 
-const PageHeader = (props: {
-  setProjectModalOpen: (isOpen: boolean) => void;
-}) => {
+const PageHeader = (props: { projectButton: React.ReactNode }) => {
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
         <ButtonNoPadding type={"link"} onClick={resetRoute}>
           <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
         </ButtonNoPadding>
-        <ProjectPopover setProjectModalOpen={props.setProjectModalOpen} />
+        <ProjectPopover {...props} />
         <span>用户</span>
       </HeaderLeft>
       <HeaderRight>
