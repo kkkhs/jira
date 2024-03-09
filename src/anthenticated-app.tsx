@@ -7,12 +7,15 @@ import { Button, Dropdown, Menu } from "antd";
 import { ProjectScreen } from "./screens/project";
 import { Navigate, Route, Routes } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
+import { resetRoute } from "./utils";
 
 export const AnthenticatedApp = () => {
   const value: any = undefined;
   return (
     <Container>
-      <PageHeader />
+      <Button type={"link"} onClick={resetRoute}>
+        <PageHeader />
+      </Button>
       <Main>
         <Router>
           <Routes>
@@ -21,6 +24,7 @@ export const AnthenticatedApp = () => {
               path={"/projects/:projectId/*"}
               element={<ProjectScreen />}
             />
+            <Route path="/" element={<Navigate to={"/projects"} />} />
           </Routes>
         </Router>
       </Main>
