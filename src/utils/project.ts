@@ -1,21 +1,15 @@
-import { useAsync } from "./use-async";
-import { Project } from "../screens/project-list/list";
-import { useCallback, useEffect } from "react";
-import { cleanObject, useMount } from "./index";
-import { useHttp } from "./http";
-import { QueryKey, useMutation, useQuery, useQueryClient } from "react-query";
-import { useProjectsSearchParams } from "../screens/project-list/util";
-import { prettyFormat } from "@testing-library/react";
+import { Project } from "screens/project-list/list";
+import { useHttp } from "utils/http";
+import { QueryKey, useMutation, useQuery } from "react-query";
 import {
   useAddConfig,
   useDeleteConfig,
   useEditConfig,
-} from "./use-optimistic-options";
+} from "utils/use-optimistic-options";
 
 export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp();
 
-  //key用["projects", param]实现当param变化时触发
   return useQuery<Project[]>(["projects", param], () =>
     client("projects", { data: param }),
   );
@@ -23,7 +17,6 @@ export const useProjects = (param?: Partial<Project>) => {
 
 export const useEditProject = (queryKey: QueryKey) => {
   const client = useHttp();
-
   return useMutation(
     (params: Partial<Project>) =>
       client(`projects/${params.id}`, {

@@ -1,6 +1,4 @@
 import { QueryKey, useQueryClient } from "react-query";
-import { Project } from "../screens/project-list/list";
-import { QueryKeys } from "react-query/types/devtools/styledComponents";
 
 export const useConfig = (
   queryKey: QueryKey,
@@ -17,10 +15,7 @@ export const useConfig = (
       return { previousItems };
     },
     onError(error: any, newItem: any, context: any) {
-      queryClient.setQueryData(
-        queryKey,
-        (context as { previousItems: Project[] }).previousItems,
-      );
+      queryClient.setQueryData(queryKey, context.previousItems);
     },
   };
 };
@@ -30,7 +25,6 @@ export const useDeleteConfig = (queryKey: QueryKey) =>
     queryKey,
     (target, old) => old?.filter((item) => item.id !== target.id) || [],
   );
-
 export const useEditConfig = (queryKey: QueryKey) =>
   useConfig(
     queryKey,
@@ -39,6 +33,5 @@ export const useEditConfig = (queryKey: QueryKey) =>
         item.id === target.id ? { ...item, ...target } : item,
       ) || [],
   );
-
 export const useAddConfig = (queryKey: QueryKey) =>
   useConfig(queryKey, (target, old) => (old ? [...old, target] : []));

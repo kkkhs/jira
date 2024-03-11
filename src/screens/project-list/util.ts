@@ -3,23 +3,21 @@ import { useMemo } from "react";
 import { useProject } from "utils/project";
 import { useSearchParams } from "react-router-dom";
 
+// 项目列表搜索的参数
 export const useProjectsSearchParams = () => {
   const [param, setParam] = useUrlQueryParam(["name", "personId"]);
   return [
     useMemo(
-      () => ({
-        ...param,
-        personId: Number(param.personId) || undefined,
-      }),
+      () => ({ ...param, personId: Number(param.personId) || undefined }),
       [param],
     ),
     setParam,
   ] as const;
 };
 
-export const useProjectQueryKey = () => {
+export const useProjectsQueryKey = () => {
   const [params] = useProjectsSearchParams();
-  return ["project", params];
+  return ["projects", params];
 };
 
 export const useProjectModal = () => {
