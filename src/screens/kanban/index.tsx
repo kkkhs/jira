@@ -13,6 +13,7 @@ import { ScreenContainer } from "../../components/lib";
 import { useTasks } from "../../utils/task";
 import { Spin } from "antd";
 import { CreateKanban } from "./create-kanban";
+import { TaskModal } from "./task-modal";
 
 export const KanbanScreen = () => {
   useDocumentTitle("看板列表");
@@ -38,6 +39,7 @@ export const KanbanScreen = () => {
           <CreateKanban />
         </ColumnsContainer>
       )}
+      <TaskModal />
     </ScreenContainer>
   );
 };
@@ -64,6 +66,6 @@ export const ColumnsContainer = styled.div`
   ::-webkit-scrollbar-thumb {
     border-radius: 1rem;
     -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `;
