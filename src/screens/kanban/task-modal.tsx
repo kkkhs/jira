@@ -8,7 +8,7 @@ import { TaskTypeSelect } from "../../components/task-type-select";
 
 const layout = {
   labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
+  wrapperCol: { span: 12 },
 };
 
 export const TaskModal = () => {
