@@ -70,6 +70,7 @@ export const useDragEnd = () => {
   const { mutate: reorderKanban } = useReorderKanban(useKanbansQueryKey());
   const { mutate: reorderTask } = useReorderTask(useTasksQueryKey());
   const { data: allTasks = [] } = useTasks(useTasksSearchParams());
+
   return useCallback(
     ({ source, destination, type }: DropResult) => {
       if (!destination) {
@@ -122,7 +123,7 @@ export const ColumnsContainer = styled("div")`
   flex: 1;
 
   ::-webkit-scrollbar {
-    height: 1rem;
+    height: 0.5rem;
     border-radius: 1rem;
     background-color: rgba(0, 0, 0, 0.1);
   }

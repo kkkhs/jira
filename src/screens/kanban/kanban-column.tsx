@@ -1,8 +1,6 @@
 import React from "react";
 import { Kanban } from "types/kanban";
 import { useTaskTypes } from "utils/task-type";
-import taskIcon from "assets/task.svg";
-import bugIcon from "assets/bug.svg";
 import styled from "@emotion/styled";
 import { Button, Card, Dropdown, Menu, Modal } from "antd";
 import { useTasks } from "utils/task";
@@ -17,6 +15,7 @@ import { Mark } from "components/mark";
 import { useDeleteKanban } from "utils/kanban";
 import { Row } from "components/lib";
 import { Drag, Drop, DropChild } from "components/drag-and-drop";
+import { BugTwoTone, CheckSquareTwoTone } from "@ant-design/icons";
 
 const TaskTypeIcon = ({ id }: { id: number }) => {
   const { data: taskTypes } = useTaskTypes();
@@ -24,8 +23,15 @@ const TaskTypeIcon = ({ id }: { id: number }) => {
   if (!name) {
     return null;
   }
-  // return <img alt={"task-icon"} src={name === "task" ? taskIcon : bugIcon} />;
-  return <div>{name === "task" ? "task" : "bug"}</div>;
+  return (
+    <>
+      {name === "task" ? (
+        <CheckSquareTwoTone />
+      ) : (
+        <BugTwoTone twoToneColor={"rgba(255,0,0,0.9)"} />
+      )}
+    </>
+  );
 };
 
 const TaskCard = ({ task }: { task: Task }) => {
@@ -37,7 +43,7 @@ const TaskCard = ({ task }: { task: Task }) => {
       style={{ marginBottom: "0.5rem", cursor: "pointer" }}
       key={task.id}
     >
-      <p>
+      <p style={{ marginBottom: "0.5rem" }}>
         <Mark keyWord={keyword} name={task.name} />
       </p>
       <TaskTypeIcon id={task.typeId} />
@@ -63,7 +69,7 @@ export const KanbanColumn = React.forwardRef<
           direction={"vertical"}
           droppableId={String(kanban.id)}
         >
-          <DropChild>
+          <DropChild style={{ minHeight: "5px" }}>
             {tasks?.map((task, taskIndex) => (
               <Drag
                 key={task.id}

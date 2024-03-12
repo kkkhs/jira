@@ -1,11 +1,10 @@
 import { useHttp } from "./http";
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { Kanban } from "../types/kanban";
-import { Project } from "../types/project";
 import {
   useAddConfig,
   useDeleteConfig,
-  useReorderConfig,
+  useReorderKanbanConfig,
 } from "./use-optimistic-options";
 
 export const useKanbans = (param?: Partial<Kanban>) => {
@@ -52,6 +51,7 @@ export interface SortProps {
   toKanbanId?: number;
 }
 
+// 实现拖拽持久化
 export const useReorderKanban = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation((params: SortProps) => {
@@ -59,5 +59,5 @@ export const useReorderKanban = (queryKey: QueryKey) => {
       data: params,
       method: "POST",
     });
-  }, useReorderConfig(queryKey));
+  }, useReorderKanbanConfig(queryKey));
 };

@@ -1,12 +1,11 @@
 import { useHttp } from "./http";
 import { QueryKey, useMutation, useQuery } from "react-query";
 import { Task } from "../types/task";
-import { Kanban } from "../types/kanban";
 import {
   useAddConfig,
   useDeleteConfig,
   useEditConfig,
-  useReorderConfig,
+  useReorderTaskConfig,
 } from "./use-optimistic-options";
 import { Project } from "../types/project";
 import { SortProps } from "./kanban";
@@ -62,7 +61,7 @@ export const useReorderTask = (queryKey: QueryKey) => {
       data: params,
       method: "POST",
     });
-  }, useReorderConfig(queryKey));
+  }, useReorderTaskConfig(queryKey));
 };
 
 export const useTask = (id?: number) => {
