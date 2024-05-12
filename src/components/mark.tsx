@@ -1,3 +1,5 @@
+import React from "react";
+
 export const Mark = ({ name, keyWord }: { name: string; keyWord: string }) => {
   if (!keyWord) {
     return <>{name}</>;

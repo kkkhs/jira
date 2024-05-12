@@ -3,7 +3,6 @@ import { useProject } from "utils/project";
 import { useUrlQueryParam } from "utils/url";
 import { useCallback, useMemo } from "react";
 import { useTask } from "../../utils/task";
-import { useDebounce } from "../../utils";
 
 export const useProjectIdInUrl = () => {
   const { pathname } = useLocation();

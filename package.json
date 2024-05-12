@@ -33,7 +33,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build -r https://github.com/kkkhs/kkkhs.github.io.git -b main"
   },
   "eslintConfig": {
     "extends": [
@@ -61,6 +63,7 @@
     "@welldone-software/why-did-you-render": "^8.0.1",
     "antd": "^5.15.1",
     "eslint-config-prettier": "^9.1.0",
+    "gh-pages": "^6.1.1",
     "husky": "^9.0.11",
     "json-server": "^1.0.0-alpha.23",
     "lint-staged": "^15.2.2",
