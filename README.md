@@ -1,46 +1,30 @@
-# Getting Started with Create React App
+## 项目介绍：
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+​	这个工具主要是对**团队任务**进行追踪、管理、组织和优先排序
 
-## Available Scripts
+## 技术栈：
 
-In the project directory, you can run:
+​	**React + Redux + React-Router + React-Query +  Axios + CSS-in-JS + AntD**
 
-### `npm start`
+## 功能实现：
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- 从0搭建项目环境， 并配置 eslint, prettier, commintlint等代码规范工具
+- 实现查看项目列表 / 项目详情 / 任务列表 / 看板列表、进行项目编辑与删除、进行任务/看板排序
+- 异步处理 / HTTP增删改查 / 状态管理 / 路由管理 / ⻚⾯标题管理 
+- 实现 JWT 登陆注册
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![image](https://github.com/kkkhs/jira/assets/141250392/bca7526c-aa10-4013-8d2b-f63414e586d5)
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 部署方法：
 
-### `npm run build`
+1.  git clone 本项目到本地
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. 修改 `.env` 文件中 `REACT_APP_API_URL = 你的服务部署地址`
+   ![image](https://github.com/kkkhs/jira/assets/141250392/18ea98ac-7184-489f-8056-442d4775d530)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. 重新 npm run build
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. 上传重新构建后的build文件加到服务器静态运行即可
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+	
